@@ -1,4 +1,4 @@
-package com.practice.com.practice.consumer;
+package com.practice.consumer;
 
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;

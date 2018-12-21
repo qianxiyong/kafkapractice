@@ -1,4 +1,4 @@
-package com.practice.com.practice.consumer;
+package com.practice.consumer;
 
 import kafka.api.FetchRequestBuilder;
 import kafka.javaapi.*;
