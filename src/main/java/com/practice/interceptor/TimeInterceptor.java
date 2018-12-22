@@ -12,6 +12,9 @@ import java.util.Map;
  */
 public class TimeInterceptor implements ProducerInterceptor<String,String> {
     @Override
+    /**
+     * 在发送的主线程中调用 拦截器的调用顺序依赖于添加顺序
+     */
     public ProducerRecord<String, String> onSend(ProducerRecord<String, String> producerRecord) {
         return new ProducerRecord<String,String>(
                 producerRecord.topic(),

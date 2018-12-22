@@ -20,13 +20,19 @@ public class CountorInterceptor implements ProducerInterceptor<String,String>{
         return producerRecord;
     }
 
+    /**
+     *
+     * @param recordMetadata
+     * @param e 在回调的线程中调用 运用在send()方法的回调函数之前 拦截器的调用顺序依赖于添加顺序
+     */
     @Override
     public void onAcknowledgement(RecordMetadata recordMetadata, Exception e) {
 
         if(e != null) {
-            sendSuccess++;
-        }else{
+            System.out.println(e);
             sendError++;
+        }else{
+            sendSuccess++;
         }
 
     }

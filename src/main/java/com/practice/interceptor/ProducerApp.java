@@ -41,14 +41,20 @@ public class ProducerApp {
 
         int times = 10;
         for(int i = 0;i < times;i++) {
-            ProducerRecord<String,String> record = new ProducerRecord<>("first","helloworld:"+i);
+            //添加key 进行分区 观察顺序 ;不指定partitioner 和不指定key 的时候 会轮询放入分区 轮询的开始和顺序不固定 不过确定是轮询
+            ProducerRecord<String,String> record = new ProducerRecord<>("first",i+"","helloworld:"+i);
             producer.send(record, new Callback() {
                 @Override
                 public void onCompletion(RecordMetadata recordMetadata, Exception e) {
-                    System.out.println("消息所在分区："+recordMetadata.partition());
+                    if(e != null) {
+                        e.printStackTrace();
+                        System.out.println("发送失败");
+                    }else {
+                        System.out.println("消息所在分区："+recordMetadata.partition());
+                    }
                 }
             });
-            producer.flush();
+            producer.flush(); //flush+close整个发送有序
         }
         producer.close();
     }
